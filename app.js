@@ -4,6 +4,9 @@ const cors = require('cors');
 
 require('dotenv').config();
 
+const shopsRouter = require('./routes/api/shops-list');
+const productsRouter = require('./routes/api/products-list');
+
 const app = express();
 
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
@@ -11,6 +14,9 @@ const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
 app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
+
+app.use('/api/shops', shopsRouter);
+app.use('/api/products', productsRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: 'Not found' });
