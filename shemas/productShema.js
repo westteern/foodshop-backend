@@ -3,8 +3,11 @@ const { Schema, model } = require('mongoose');
 const productSchema = new Schema(
   {
     producer: {
-      type: String,
-      required: true,
+      type: {
+        type: Schema.Types.ObjectId,
+        ref: 'shop',
+        required: true,
+      },
     },
     name: {
       type: String,
